@@ -1,0 +1,255 @@
+<svg width="600" height="900" viewBox="0 0 600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="rgba(0,0,0,0.1)"/>
+    </filter>
+  </defs>
+  
+  <!-- Chat window background -->
+  <rect width="600" height="900" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1" filter="url(#shadow)"/>
+  
+  <!-- Header -->
+  <rect width="600" height="60" rx="12" fill="#f8f9fa"/>
+  <rect y="12" width="600" height="48" fill="#f8f9fa"/>
+  
+  <!-- Header content -->
+  <circle cx="30" cy="30" r="12" fill="#10a37f"/>
+  <text x="30" y="35" text-anchor="middle" fill="white" font-size="14" font-weight="bold">🤖</text>
+  <text x="50" y="35" fill="#343541" font-size="16" font-weight="600">CryptoLLM</text>
+  <text x="500" y="35" fill="#8e8ea0" font-size="14">算法分析助手</text>
+  
+  <!-- System welcome message (AI - left side) -->
+  <g id="systemMsg" opacity="1">
+    <circle cx="50" cy="100" r="14" fill="#10a37f"/>
+    <text x="50" y="105" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🤖</text>
+    <rect x="80" y="85" width="450" height="30" rx="12" fill="#f7f7f8"/>
+    <text x="95" y="105" fill="#343541" font-size="14">你好！我是CryptoLLM，专业的密码学分析助手。</text>
+    <animateTransform attributeName="transform" type="translate" values="-20,0;0,0" dur="0.8s" begin="indefinite" id="systemMsgAnim" fill="freeze"/>
+    <animate attributeName="opacity" values="0;1" dur="0.8s" begin="indefinite" id="systemMsgFade" fill="freeze"/>
+  </g>
+  
+  <!-- First Q&A round -->
+  <!-- User question 1 (User - right side) -->
+  <g id="userMsg1" opacity="1">
+    <circle cx="550" cy="150" r="14" fill="#19c37d"/>
+    <text x="550" y="155" text-anchor="middle" fill="white" font-size="12" font-weight="bold">👤</text>
+    <rect x="120" y="135" width="400" height="30" rx="12" fill="#2f2f2f"/>
+    <text x="135" y="155" fill="white" font-size="14">请分析AES-256加密算法的安全性特点</text>
+    <animateTransform attributeName="transform" type="translate" values="20,0;0,0" dur="0.6s" begin="indefinite" id="userMsg1Anim" fill="freeze"/>
+    <animate attributeName="opacity" values="0;1" dur="0.6s" begin="indefinite" id="userMsg1Fade" fill="freeze"/>
+  </g>
+  
+  <!-- AI response 1 (AI - left side) -->
+  <g id="aiResponse1" opacity="1">
+    <circle cx="50" cy="220" r="14" fill="#10a37f"/>
+    <text x="50" y="225" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🤖</text>
+    <rect x="80" y="185" width="480" height="120" rx="12" fill="#f7f7f8"/>
+    <text x="95" y="205" fill="#343541" font-size="16" font-weight="600">AES-256安全性分析：</text>
+    <text x="95" y="225" fill="#343541" font-size="14">• 256位密钥长度，提供2^256种可能的密钥组合，理论上无法暴力破解</text>
+    <text x="95" y="245" fill="#343541" font-size="14">• 采用SPN结构，14轮加密轮次确保高度扩散和混淆</text>
+    <text x="95" y="265" fill="#343541" font-size="14">• 抗量子攻击能力强，即使面对Grover算法也需要2^128次运算</text>
+    <text x="95" y="285" fill="#343541" font-size="14">• 被NSA批准用于机密级信息保护，符合FIPS 140-2标准</text>
+    <animate attributeName="opacity" values="0;1" dur="1s" begin="indefinite" id="aiResponse1Fade" fill="freeze"/>
+  </g>
+  
+  <!-- Second Q&A round -->
+  <!-- User question 2 (User - right side) -->
+  <g id="userMsg2" opacity="1">
+    <circle cx="550" cy="340" r="14" fill="#19c37d"/>
+    <text x="550" y="345" text-anchor="middle" fill="white" font-size="12" font-weight="bold">👤</text>
+    <rect x="50" y="325" width="470" height="30" rx="12" fill="#2f2f2f"/>
+    <text x="65" y="345" fill="white" font-size="14">RSA-2048与AES-256相比，在安全性和性能上有什么差异？</text>
+    <animateTransform attributeName="transform" type="translate" values="20,0;0,0" dur="0.6s" begin="indefinite" id="userMsg2Anim" fill="freeze"/>
+    <animate attributeName="opacity" values="0;1" dur="0.6s" begin="indefinite" id="userMsg2Fade" fill="freeze"/>
+  </g>
+  
+  <!-- AI response 2 (AI - left side) -->
+  <g id="aiResponse2" opacity="1">
+    <circle cx="50" cy="430" r="14" fill="#10a37f"/>
+    <text x="50" y="435" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🤖</text>
+    <rect x="80" y="375" width="480" height="140" rx="12" fill="#f7f7f8"/>
+    <text x="95" y="395" fill="#343541" font-size="16" font-weight="600">RSA-2048 vs AES-256 对比分析：</text>
+    
+    <text x="95" y="415" fill="#343541" font-size="14" font-weight="600">安全性对比：</text>
+    <text x="95" y="432" fill="#343541" font-size="13">• RSA-2048：等效80位安全强度，易受量子攻击威胁</text>
+    <text x="95" y="447" fill="#343541" font-size="13">• AES-256：等效128位安全强度，抗量子攻击能力更强</text>
+    
+    <text x="95" y="467" fill="#343541" font-size="14" font-weight="600">性能对比：</text>
+    <text x="95" y="484" fill="#343541" font-size="13">• RSA加密：慢，用于密钥交换</text>
+    <text x="95" y="499" fill="#343541" font-size="13">• AES加密：快，适合数据加密</text>
+    
+    <animate attributeName="opacity" values="0;1" dur="1s" begin="indefinite" id="aiResponse2Fade" fill="freeze"/>
+  </g>
+  
+  <!-- Third Q&A round -->
+  <!-- User question 3 (User - right side) -->
+  <g id="userMsg3" opacity="1">
+    <circle cx="550" cy="560" r="14" fill="#19c37d"/>
+    <text x="550" y="565" text-anchor="middle" fill="white" font-size="12" font-weight="bold">👤</text>
+    <rect x="150" y="545" width="370" height="30" rx="12" fill="#2f2f2f"/>
+    <text x="165" y="565" fill="white" font-size="14">能否推荐一个混合加密方案的最佳实践？</text>
+    <animateTransform attributeName="transform" type="translate" values="20,0;0,0" dur="0.6s" begin="indefinite" id="userMsg3Anim" fill="freeze"/>
+    <animate attributeName="opacity" values="0;1" dur="0.6s" begin="indefinite" id="userMsg3Fade" fill="freeze"/>
+  </g>
+  
+  <!-- AI response 3 (AI - left side) -->
+  <g id="aiResponse3" opacity="1">
+    <circle cx="50" cy="640" r="14" fill="#10a37f"/>
+    <text x="50" y="645" text-anchor="middle" fill="white" font-size="12" font-weight="bold">🤖</text>
+    <rect x="80" y="595" width="480" height="160" rx="12" fill="#f7f7f8"/>
+    <text x="95" y="615" fill="#343541" font-size="16" font-weight="600">混合加密最佳实践（RSA + AES）：</text>
+    
+    <text x="95" y="635" fill="#343541" font-size="14" font-weight="600">方案架构：</text>
+    <text x="95" y="652" fill="#343541" font-size="13">1. 使用AES-256对大量数据进行对称加密（速度快）</text>
+    <text x="95" y="667" fill="#343541" font-size="13">2. 使用RSA-4096对AES密钥进行非对称加密（安全传输）</text>
+    <text x="95" y="682" fill="#343541" font-size="13">3. 添加HMAC-SHA256确保完整性验证</text>
+    
+    <text x="95" y="702" fill="#343541" font-size="14" font-weight="600">实施建议：</text>
+    <text x="95" y="719" fill="#343541" font-size="13">• 密钥管理：定期轮换AES密钥，RSA密钥对长期使用</text>
+    <text x="95" y="734" fill="#343541" font-size="13">• 性能优化：大文件分块处理，并行加密提升效率</text>
+    <text x="95" y="749" fill="#343541" font-size="13">• 安全存储：使用HSM或密钥管理服务保护私钥</text>
+    
+    <animate attributeName="opacity" values="0;1" dur="1s" begin="indefinite" id="aiResponse3Fade" fill="freeze"/>
+  </g>
+  
+  
+  <!-- Input area -->
+  <rect x="40" y="850" width="470" height="40" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1" rx="20"/>
+  <text x="55" y="873" fill="#9ca3af" font-size="14">询问任何问题</text>
+  <circle cx="530" cy="870" r="15" fill="#10a37f"/>
+  <path d="M525 870 L535 870 M530 865 L535 870 L530 875" stroke="white" stroke-width="2" fill="none"/>
+  
+  <!-- JavaScript for scroll trigger and sequential animation -->
+  <script type="text/javascript">
+  <![CDATA[
+    // 检测SVG是否进入视窗
+    function isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
+    }
+    
+    let animationStarted = false;
+    let currentStep = 0;
+    
+    // 首先设置所有元素为不可见
+    function initializeElements() {
+      const elements = ['systemMsg', 'userMsg1', 'aiResponse1', 'userMsg2', 'aiResponse2', 
+                       'userMsg3', 'aiResponse3'];
+      elements.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.setAttribute('opacity', '0');
+        }
+      });
+    }
+    
+    // 动画步骤序列 - 移除所有typing indicator
+    const animationSteps = [
+      // Step 0: System message
+      () => {
+        const element = document.getElementById('systemMsg');
+        if (element) {
+          element.setAttribute('opacity', '1');
+          document.getElementById('systemMsgAnim').beginElement();
+          document.getElementById('systemMsgFade').beginElement();
+        }
+      },
+      // Step 1: User question 1
+      () => {
+        const element = document.getElementById('userMsg1');
+        if (element) {
+          element.setAttribute('opacity', '1');
+          document.getElementById('userMsg1Anim').beginElement();
+          document.getElementById('userMsg1Fade').beginElement();
+        }
+      },
+      // Step 2: AI response 1
+      () => {
+        const element = document.getElementById('aiResponse1');
+        if (element) {
+          element.setAttribute('opacity', '1');
+          document.getElementById('aiResponse1Fade').beginElement();
+        }
+      },
+      // Step 3: User question 2
+      () => {
+        const element = document.getElementById('userMsg2');
+        if (element) {
+          element.setAttribute('opacity', '1');
+          document.getElementById('userMsg2Anim').beginElement();
+          document.getElementById('userMsg2Fade').beginElement();
+        }
+      },
+      // Step 4: AI response 2
+      () => {
+        const element = document.getElementById('aiResponse2');
+        if (element) {
+          element.setAttribute('opacity', '1');
+          document.getElementById('aiResponse2Fade').beginElement();
+        }
+      },
+      // Step 5: User question 3
+      () => {
+        const element = document.getElementById('userMsg3');
+        if (element) {
+          element.setAttribute('opacity', '1');
+          document.getElementById('userMsg3Anim').beginElement();
+          document.getElementById('userMsg3Fade').beginElement();
+        }
+      },
+      // Step 6: AI response 3
+      () => {
+        const element = document.getElementById('aiResponse3');
+        if (element) {
+          element.setAttribute('opacity', '1');
+          document.getElementById('aiResponse3Fade').beginElement();
+        }
+      },
+    ];
+    
+    // 执行下一个动画步骤
+    function executeNextStep() {
+      if (currentStep < animationSteps.length) {
+        animationSteps[currentStep]();
+        currentStep++;
+        
+        // 设置下一步的延迟时间
+        let delay = 1000; // 默认1秒，加快播放速度
+        if (currentStep === 2 || currentStep === 4 || currentStep === 6) {
+          delay = 1500; // AI回答显示时间稍长一些
+        }
+        
+        if (currentStep < animationSteps.length) {
+          setTimeout(executeNextStep, delay);
+        }
+      }
+    }
+    
+    // 监听页面滚动
+    function checkScroll() {
+      if (!animationStarted) {
+        const svg = document.querySelector('svg');
+        if (svg && isInViewport(svg)) {
+          animationStarted = true;
+          initializeElements(); // 初始化所有元素为不可见
+          executeNextStep();
+        }
+      }
+    }
+    
+    // 页面加载时初始化
+    document.addEventListener('DOMContentLoaded', () => {
+      initializeElements();
+    });
+    
+    // 绑定滚动事件
+    window.addEventListener('scroll', checkScroll);
+    window.addEventListener('load', checkScroll);
+  ]]>
+  </script>
+</svg>

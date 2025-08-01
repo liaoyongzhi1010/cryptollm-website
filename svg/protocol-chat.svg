@@ -1,0 +1,132 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="protocolGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#a855f7;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="userGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-color="rgba(0,0,0,0.1)"/>
+    </filter>
+  </defs>
+  
+  <!-- Chat window background -->
+  <rect width="600" height="400" rx="20" fill="white" stroke="#e5e7eb" stroke-width="1" filter="url(#shadow)"/>
+  
+  <!-- Header -->
+  <rect width="600" height="60" rx="20" fill="url(#protocolGradient)"/>
+  <rect y="20" width="600" height="40" fill="url(#protocolGradient)"/>
+  
+  <!-- Header content -->
+  <circle cx="40" cy="30" r="12" fill="white" opacity="0.9"/>
+  <text x="40" y="35" text-anchor="middle" fill="#8b5cf6" font-size="14" font-weight="bold">🔗</text>
+  <text x="70" y="35" fill="white" font-size="16" font-weight="600">CryptoLLM 协议分析</text>
+  <circle cx="560" cy="30" r="4" fill="#10b981">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="540" y="35" fill="white" font-size="12" opacity="0.9">在线</text>
+  
+  <!-- System message -->
+  <g id="systemMsg" opacity="0">
+    <circle cx="50" cy="90" r="18" fill="url(#protocolGradient)"/>
+    <text x="50" y="95" text-anchor="middle" fill="white" font-size="12">🤖</text>
+    <rect x="80" y="75" width="420" height="30" rx="15" fill="#f8fafc"/>
+    <text x="95" y="93" fill="#374151" font-size="12">我是CryptoLLM协议分析专家，可以帮你分析各种密码协议</text>
+    <animateTransform attributeName="transform" type="translate" values="0,50;0,0" dur="0.8s" begin="1s"/>
+    <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1s"/>
+  </g>
+  
+  <!-- User message -->
+  <g id="userMsg" opacity="0">
+    <rect x="100" y="125" width="380" height="30" rx="15" fill="url(#userGradient)"/>
+    <text x="115" y="143" fill="white" font-size="12">请分析TLS 1.3握手过程的安全性改进</text>
+    <circle cx="520" cy="140" r="18" fill="url(#userGradient)"/>
+    <text x="520" y="145" text-anchor="middle" fill="white" font-size="12">👤</text>
+    <animateTransform attributeName="transform" type="translate" values="50,0;0,0" dur="0.8s" begin="2.5s"/>
+    <animate attributeName="opacity" values="0;1" dur="0.5s" begin="2.5s"/>
+  </g>
+  
+  <!-- Typing indicator -->
+  <g id="typingIndicator" opacity="0">
+    <circle cx="50" cy="175" r="18" fill="url(#protocolGradient)"/>
+    <text x="50" y="180" text-anchor="middle" fill="white" font-size="12">🤖</text>
+    <rect x="80" y="160" width="200" height="30" rx="15" fill="#f8fafc"/>
+    <circle cx="120" cy="175" r="3" fill="#9ca3af">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="140" cy="175" r="3" fill="#9ca3af">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" begin="0.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="160" cy="175" r="3" fill="#9ca3af">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" begin="0.4s" repeatCount="indefinite"/>
+    </circle>
+    <animate attributeName="opacity" values="0;1" dur="0.5s" begin="4s"/>
+    <animate attributeName="opacity" values="1;0" dur="0.5s" begin="6s"/>
+  </g>
+  
+  <!-- AI response -->
+  <g id="aiResponse" opacity="0">
+    <circle cx="50" cy="210" r="18" fill="url(#protocolGradient)"/>
+    <text x="50" y="215" text-anchor="middle" fill="white" font-size="12">🤖</text>
+    <rect x="80" y="195" width="480" height="80" rx="15" fill="white" stroke="#e5e7eb"/>
+    
+    <!-- Response text with typewriter effect -->
+    <text x="95" y="213" fill="#374151" font-size="11" font-weight="600">🔒 TLS 1.3相比1.2版本有重大安全性改进：</text>
+    
+    <text x="95" y="230" fill="#374151" font-size="10">
+      <tspan>• 减少握手轮次：从2-RTT降低到1-RTT</tspan>
+      <animate attributeName="opacity" values="0;1" dur="0.1s" begin="7s"/>
+    </text>
+    <text x="95" y="245" fill="#374151" font-size="10">
+      <tspan>• 强制前向安全性：所有密钥交换使用ECDHE/DHE</tspan>
+      <animate attributeName="opacity" values="0;1" dur="0.1s" begin="7.5s"/>
+    </text>
+    <text x="95" y="260" fill="#374151" font-size="10">
+      <tspan>• 完整握手加密：除初始ClientHello外全部加密</tspan>
+      <animate attributeName="opacity" values="0;1" dur="0.1s" begin="8s"/>
+    </text>
+    
+    <animate attributeName="opacity" values="0;1" dur="0.5s" begin="6.5s"/>
+  </g>
+  
+  <!-- Protocol handshake visualization -->
+  <g id="handshakeViz" opacity="0">
+    <rect x="95" y="285" width="450" height="60" rx="8" fill="rgba(139,92,246,0.05)" stroke="rgba(139,92,246,0.2)"/>
+    <text x="110" y="300" fill="#8b5cf6" font-size="10" font-weight="600">TLS 1.3握手流程：</text>
+    
+    <!-- Client and Server -->
+    <text x="110" y="315" fill="#8b5cf6" font-size="9" font-weight="600">客户端</text>
+    <text x="480" y="315" fill="#8b5cf6" font-size="9" font-weight="600">服务器</text>
+    
+    <!-- Handshake steps -->
+    <g opacity="0">
+      <path d="M150 320 L430 320" stroke="#10b981" stroke-width="2" marker-end="url(#arrow)"/>
+      <text x="290" y="318" text-anchor="middle" fill="#10b981" font-size="8">ClientHello + KeyShare</text>
+      <animate attributeName="opacity" values="0;1" dur="0.5s" begin="9s"/>
+    </g>
+    
+    <g opacity="0">
+      <path d="M430 335 L150 335" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrow)"/>
+      <text x="290" y="333" text-anchor="middle" fill="#f59e0b" font-size="8">ServerHello + Certificate + Finished</text>
+      <animate attributeName="opacity" values="0;1" dur="0.5s" begin="10s"/>
+    </g>
+    
+    <animate attributeName="opacity" values="0;1" dur="0.5s" begin="8.5s"/>
+  </g>
+  
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#10b981"/>
+    </marker>
+  </defs>
+  
+  <!-- Input field -->
+  <rect x="20" y="360" width="560" height="30" rx="15" fill="#f9fafb" stroke="#d1d5db"/>
+  <text x="35" y="378" fill="#9ca3af" font-size="12">请输入你想了解的协议问题...</text>
+  <circle cx="570" cy="375" r="12" fill="url(#protocolGradient)"/>
+  <path d="M566 375 L574 375 M570 371 L574 375 L570 379" stroke="white" stroke-width="1.5" fill="none"/>
+</svg>

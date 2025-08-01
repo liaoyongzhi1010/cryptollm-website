@@ -1,165 +1,225 @@
-/* language.js - 中英文切换功能 */
+// 全屏滚动功能
+let currentSection = 0;
+const totalSections = 2; // 只有2页
+let isScrolling = false;
+let isInFullpageMode = true; // 跟踪是否在全屏模式
 
-// 语言数据
-const translations = {
-    'zh': {
-        // 通用导航
-        'api-developer': 'API 开发者',
-        'lang-toggle': 'English',
-        'nav-home': '首页',
-        'nav-product': '产品介绍',
-        'nav-chat': '开始对话',
-        'nav-api': 'API 开发者',
-        
-        // 首页内容
-        'announcement': '🔐 CryptoLLM-V1 密码大模型正式发布，专业支持密码分析、密码协议、密码工程等任务，点击查看详情。',
-        'main-title': 'CryptoLLM',
-        'main-subtitle': '探索密码学之境',
-        'chat-title': '开始对话',
-        'chat-desc': '与 CryptoLLM-V1 免费对话',
-        'chat-subtitle': '体验全新密码学推理模型',
-        'app-title': '产品介绍',
-        'app-desc': '了解 CryptoLLM 的核心能力',
-        'app-subtitle': '专业密码学智能助手',
-        
-        // 底部品牌
-        'footer-subtitle': 'by XDU NSS',
-        
-        // 底部导航
-        'research': '研究成果',
-        'quick-links': '快速链接',
-        'legal-security': '法务安全',
-        'about-us': '了解我们',
-        
-        // 研究成果部分
-        'evaluation-benchmark': '评估基准',
-        'technical-papers': '技术论文',
-        'research-reports': '研究报告',
-        
-        // 快速链接部分
-        'product-home': '产品首页',
-        'product-intro': '产品介绍',
-        'start-chat': '开始对话',
-        'api-docs': 'API 文档',
-        
-        // 法务安全部分
-        'privacy-policy': '隐私政策',
-        'terms-conditions': '使用条款',
-        'contact-us': '联系我们',
-        
-        // 了解我们部分
-        'nss-website': 'NSS官网',
-        
-        // 版权信息部分
-        'copyright': '© 2025 西安电子科技大学计算机科学与技术学院 (XDU NSS)',
-        'icp-record': '陕ICP备05016463号',
-        'edu-record': '教育网备案',
-        'academic-integrity': '学术诚信声明'
-    },
-    'en': {
-        // 通用导航
-        'api-developer': 'API Developer',
-        'lang-toggle': '中文',
-        'nav-home': 'Home',
-        'nav-product': 'Product',
-        'nav-chat': 'Start Chat',
-        'nav-api': 'API Developer',
-        
-        // 首页内容
-        'announcement': '🔐 CryptoLLM-V1 officially released with professional cryptographic reasoning capabilities. Click for details.',
-        'main-title': 'CryptoLLM',
-        'main-subtitle': 'Into the Cryptographic Realm',
-        'chat-title': 'Start Chat',
-        'chat-desc': 'Free access to CryptoLLM-V1',
-        'chat-subtitle': 'Experience advanced cryptographic model',
-        'app-title': 'Product Overview',
-        'app-desc': 'Learn about CryptoLLM capabilities',
-        'app-subtitle': 'Professional cryptographic assistant',
-        
-        // 底部品牌
-        'footer-subtitle': 'by XDU NSS',
-        
-        // 底部导航
-        'research': 'Research',
-        'quick-links': 'Quick Links',
-        'legal-security': 'Legal & Security',
-        'about-us': 'About Us',
-        
-        // 研究成果部分
-        'evaluation-benchmark': 'Evaluation Benchmark',
-        'technical-papers': 'Technical Papers',
-        'research-reports': 'Research Reports',
-        
-        // 快速链接部分
-        'product-home': 'Product Home',
-        'product-intro': 'Product Introduction',
-        'start-chat': 'Start Chat',
-        'api-docs': 'API Documentation',
-        
-        // 法务安全部分
-        'privacy-policy': 'Privacy Policy',
-        'terms-conditions': 'Terms & Conditions',
-        'contact-us': 'Contact Us',
-        
-        // 了解我们部分
-        'nss-website': 'NSS Website',
-        
-        // 版权信息部分
-        'copyright': '© 2025 School of Computer Science and Technology, Xidian University (XDU NSS)',
-        'icp-record': 'Shaanxi ICP No. 05016463',
-        'edu-record': 'Education Network Registration',
-        'academic-integrity': 'Academic Integrity Statement'
-    }
-};
-
-// 当前语言状态
-let currentLang = 'zh';
-
-// 更新页面文本的函数
-function updatePageText(lang) {
-    const texts = translations[lang];
+// 初始化全屏滚动
+function initFullPageScroll() {
+    const container = document.getElementById('fullpage');
     
-    // 更新所有具有data-key属性的元素
-    document.querySelectorAll('[data-key]').forEach(element => {
-        const key = element.getAttribute('data-key');
-        if (texts[key]) {
-            element.textContent = texts[key];
+    // 监听鼠标滚轮事件
+    window.addEventListener('wheel', handleScroll, { passive: false });
+    
+    // 监听键盘事件
+    window.addEventListener('keydown', handleKeydown);
+    
+    // 监听触摸事件（移动端）
+    let touchStartY = 0;
+    window.addEventListener('touchstart', function(e) {
+        touchStartY = e.touches[0].clientY;
+    });
+    
+    window.addEventListener('touchend', function(e) {
+        if (isScrolling || !isInFullpageMode) return;
+        
+        const touchEndY = e.changedTouches[0].clientY;
+        const deltaY = touchStartY - touchEndY;
+        
+        if (Math.abs(deltaY) > 50) { // 最小滑动距离
+            if (deltaY > 0) {
+                scrollToNext();
+            } else {
+                scrollToPrev();
+            }
         }
     });
+    
+    // 页面指示器点击事件
+    document.querySelectorAll('.indicator-dot').forEach((dot, index) => {
+        dot.addEventListener('click', () => scrollToSection(index));
+    });
+}
 
-    // 更新语言切换按钮
-    const langToggle = document.querySelector('.current-lang');
-    if (langToggle) {
-        langToggle.textContent = texts['lang-toggle'];
+// 处理滚轮事件
+function handleScroll(e) {
+    if (!isInFullpageMode) return; // 如果不在全屏模式，允许正常滚动
+    
+    e.preventDefault();
+    
+    if (isScrolling) return;
+    
+    if (e.deltaY > 0) {
+        if (currentSection === totalSections - 1) {
+            // 在最后一页向下滚动时，退出全屏模式
+            exitFullpageMode();
+        } else {
+            scrollToNext();
+        }
+    } else {
+        scrollToPrev();
+    }
+}
+
+// 退出全屏模式
+function exitFullpageMode() {
+    isInFullpageMode = false;
+    document.body.style.overflow = 'auto'; // 恢复正常滚动
+    
+    // 滚动到正常内容区域
+    const normalContent = document.querySelector('.normal-scroll-content');
+    if (normalContent) {
+        normalContent.scrollIntoView({ behavior: 'smooth' });
     }
     
-    // 更新HTML lang属性
-    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
-}
-
-// 初始化语言功能
-function initLanguage() {
-    // 页面加载时检查保存的语言偏好
-    const savedLang = localStorage.getItem('preferred-language');
-    if (savedLang && savedLang !== currentLang) {
-        currentLang = savedLang;
-        updatePageText(currentLang);
-    }
-
-    // 语言切换功能
-    const languageToggle = document.querySelector('.language-toggle');
-    if (languageToggle) {
-        languageToggle.addEventListener('click', function() {
-            currentLang = currentLang === 'zh' ? 'en' : 'zh';
-            updatePageText(currentLang);
-            
-            // 保存语言偏好到localStorage
-            localStorage.setItem('preferred-language', currentLang);
-        });
+    // 隐藏页面指示器
+    const indicator = document.querySelector('.page-indicator');
+    if (indicator) {
+        indicator.style.opacity = '0';
+        indicator.style.pointerEvents = 'none';
     }
 }
+
+// 进入全屏模式
+function enterFullpageMode() {
+    isInFullpageMode = true;
+    document.body.style.overflow = 'hidden';
+    
+    // 显示页面指示器
+    const indicator = document.querySelector('.page-indicator');
+    if (indicator) {
+        indicator.style.opacity = '1';
+        indicator.style.pointerEvents = 'auto';
+    }
+}
+
+// 处理键盘事件
+function handleKeydown(e) {
+    if (!isInFullpageMode || isScrolling) return;
+    
+    switch(e.key) {
+        case 'ArrowDown':
+        case 'PageDown':
+        case ' ': // 空格键
+            e.preventDefault();
+            if (currentSection === totalSections - 1) {
+                exitFullpageMode();
+            } else {
+                scrollToNext();
+            }
+            break;
+        case 'ArrowUp':
+        case 'PageUp':
+            e.preventDefault();
+            scrollToPrev();
+            break;
+        case 'Home':
+            e.preventDefault();
+            scrollToSection(0);
+            break;
+    }
+}
+
+// 滚动到下一页
+function scrollToNext() {
+    if (currentSection < totalSections - 1) {
+        scrollToSection(currentSection + 1);
+    }
+}
+
+// 滚动到上一页
+function scrollToPrev() {
+    if (currentSection > 0) {
+        scrollToSection(currentSection - 1);
+    }
+}
+
+// 滚动到指定页面
+function scrollToSection(index) {
+    if (index < 0 || index >= totalSections || index === currentSection || isScrolling) {
+        return;
+    }
+    
+    // 如果不在全屏模式，先进入全屏模式
+    if (!isInFullpageMode) {
+        enterFullpageMode();
+    }
+    
+    isScrolling = true;
+    currentSection = index;
+    
+    const container = document.getElementById('fullpage');
+    const translateY = -index * 100;
+    
+    container.style.transform = `translateY(${translateY}vh)`;
+    
+    // 更新页面指示器
+    updateIndicators();
+    
+    // 更新活动状态
+    updateActiveSections();
+    
+    // 滚动完成后重置状态
+    setTimeout(() => {
+        isScrolling = false;
+    }, 800);
+}
+
+// 更新页面指示器
+function updateIndicators() {
+    document.querySelectorAll('.indicator-dot').forEach((dot, index) => {
+        if (index === currentSection) {
+            dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+        }
+    });
+}
+
+// 更新活动区块状态
+function updateActiveSections() {
+    document.querySelectorAll('.fullpage-section').forEach((section, index) => {
+        if (index === currentSection) {
+            section.classList.add('active');
+        } else {
+            section.classList.remove('active');
+        }
+    });
+}
+
+// 视频弹窗相关函数
+function openVideoModal() {
+    const modal = document.getElementById('videoModal');
+    const video = document.getElementById('modalVideo');
+    modal.style.display = 'flex';
+    video.play();
+}
+
+function closeVideoModal(event) {
+    const modal = document.getElementById('videoModal');
+    const video = document.getElementById('modalVideo');
+    
+    // 如果点击的是视频容器本身，不关闭弹窗
+    if (event && event.target.closest('.video-container') && event.target !== event.currentTarget) {
+        return;
+    }
+    
+    modal.style.display = 'none';
+    video.pause();
+    video.currentTime = 0;
+}
+
+// ESC键关闭弹窗
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeVideoModal();
+    }
+});
 
 // 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', function() {
-    initLanguage();
+    initFullPageScroll();
+    
+    // 初始状态设置为全屏模式
+    enterFullpageMode();
 });
