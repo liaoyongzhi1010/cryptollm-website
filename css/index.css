@@ -1,4 +1,4 @@
-/* index.css - 主页样式文件 */
+/* index.css - 主页样式文件 - 优化尺寸版本 */
 
 /* 重置样式 */
 * {
@@ -15,7 +15,7 @@ body {
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
-    font-size: 16px;
+    font-size: 14px; /* 从16px调整到14px */
     display: flex;
     flex-direction: column;
 }
@@ -57,9 +57,9 @@ body::after {
 
 /* 容器 */
 .container {
-    max-width: 1200px;
+    max-width: 1080px; /* 从1200px调整到1080px */
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 18px; /* 从20px调整到18px */
 }
 
 /* 顶部导航 - 修改为透明背景 */
@@ -76,7 +76,7 @@ body::after {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
+    padding: 13px 0; /* 从15px调整到13px */
 }
 
 .logo {
@@ -89,7 +89,7 @@ body::after {
 }
 
 .logo-text {
-    font-size: 28px;
+    font-size: 25px; /* 从28px调整到25px */
     font-weight: 600;
     color: #1f2937;
     letter-spacing: -0.5px;
@@ -98,13 +98,13 @@ body::after {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 27px; /* 从30px调整到27px */
 }
 
 .nav-link {
     color: #374151;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 14px; /* 从16px调整到14px */
     font-weight: 500;
     transition: color 0.3s ease;
 }
@@ -116,10 +116,10 @@ body::after {
 .language-toggle {
     cursor: pointer;
     color: #6b7280;
-    font-size: 16px;
-    padding: 8px 16px;
+    font-size: 14px; /* 从16px调整到14px */
+    padding: 7px 14px; /* 从8px 16px调整到7px 14px */
     border: 1px solid #d1d5db;
-    border-radius: 8px;
+    border-radius: 7px; /* 从8px调整到7px */
     transition: all 0.3s ease;
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
@@ -134,7 +134,7 @@ body::after {
 
 /* 主要内容区域 */
 .main {
-    padding: 40px 0 80px;
+    padding: 36px 0 72px; /* 从40px 0 80px调整到36px 0 72px */
     position: relative;
     flex: 1;
 }
@@ -145,8 +145,8 @@ body::after {
     position: absolute;
     top: 20%;
     right: 5%;
-    width: 200px;
-    height: 200px;
+    width: 180px; /* 从200px调整到180px */
+    height: 180px; /* 从200px调整到180px */
     background: radial-gradient(circle, rgba(147, 197, 253, 0.1) 0%, transparent 70%);
     border-radius: 50%;
     z-index: -1;
@@ -158,8 +158,8 @@ body::after {
     position: absolute;
     bottom: 10%;
     left: 8%;
-    width: 150px;
-    height: 150px;
+    width: 135px; /* 从150px调整到135px */
+    height: 135px; /* 从150px调整到135px */
     background: radial-gradient(circle, rgba(110, 231, 183, 0.08) 0%, transparent 70%);
     border-radius: 50%;
     z-index: -1;
@@ -169,7 +169,7 @@ body::after {
 /* 公告栏 */
 .announcement {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 54px; /* 从60px调整到54px */
 }
 
 .announcement-banner {
@@ -177,9 +177,9 @@ body::after {
     background: rgba(99, 102, 241, 0.1);
     backdrop-filter: blur(10px);
     color: #4338ca;
-    padding: 14px 28px;
-    border-radius: 25px;
-    font-size: 16px;
+    padding: 13px 25px; /* 从14px 28px调整到13px 25px */
+    border-radius: 23px; /* 从25px调整到23px */
+    font-size: 14px; /* 从16px调整到14px */
     border: 1px solid rgba(99, 102, 241, 0.2);
     transition: all 0.3s ease;
     font-weight: 500;
@@ -196,50 +196,50 @@ body::after {
 }
 
 .hero-content {
-    max-width: 800px;
+    max-width: 720px; /* 从800px调整到720px */
     margin: 0 auto;
 }
 
 /* 主标题 */
 .main-title {
-    font-size: 72px;
+    font-size: 65px; /* 从72px调整到65px */
     font-weight: 400;
     color: #1f2937;
-    margin-bottom: 24px;
+    margin-bottom: 22px; /* 从24px调整到22px */
     letter-spacing: -1px;
     line-height: 1.1;
 }
 
 .main-subtitle {
-    font-size: 36px;
+    font-size: 32px; /* 从36px调整到32px */
     color: #4b5563;
     font-weight: 400;
-    margin-bottom: 80px;
+    margin-bottom: 72px; /* 从80px调整到72px */
     letter-spacing: 0px;
 }
 
 /* 功能卡片 */
 .feature-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-    gap: 30px;
-    max-width: 800px;
+    grid-template-columns: repeat(auto-fit, minmax(342px, 1fr)); /* 从380px调整到342px */
+    gap: 27px; /* 从30px调整到27px */
+    max-width: 720px; /* 从800px调整到720px */
     margin: 0 auto;
 }
 
 .feature-card {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
-    border-radius: 20px;
-    padding: 40px 30px;
+    border-radius: 18px; /* 从20px调整到18px */
+    padding: 36px 27px; /* 从40px 30px调整到36px 27px */
     text-align: center;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 7px 29px rgba(0, 0, 0, 0.1); /* 从0 8px 32px调整 */
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    min-height: 180px;
+    min-height: 162px; /* 从180px调整到162px */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -273,17 +273,17 @@ body::after {
 
 .feature-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 11px 36px rgba(0, 0, 0, 0.15); /* 从0 12px 40px调整 */
 }
 
 .chat-card:hover {
     background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(147, 197, 253, 0.08) 100%);
-    box-shadow: 0 12px 40px rgba(59, 130, 246, 0.2);
+    box-shadow: 0 11px 36px rgba(59, 130, 246, 0.2); /* 从0 12px 40px调整 */
 }
 
 .product-card:hover {
     background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(110, 231, 183, 0.08) 100%);
-    box-shadow: 0 12px 40px rgba(16, 185, 129, 0.2);
+    box-shadow: 0 11px 36px rgba(16, 185, 129, 0.2); /* 从0 12px 40px调整 */
 }
 
 .card-content {
@@ -293,23 +293,23 @@ body::after {
 }
 
 .card-title {
-    font-size: 26px;
+    font-size: 23px; /* 从26px调整到23px */
     font-weight: 600;
     color: #1f2937;
-    margin-bottom: 16px;
+    margin-bottom: 14px; /* 从16px调整到14px */
 }
 
 .card-description {
     color: #4b5563;
-    font-size: 18px;
+    font-size: 16px; /* 从18px调整到16px */
     line-height: 1.5;
-    margin-bottom: 12px;
+    margin-bottom: 11px; /* 从12px调整到11px */
     font-weight: 500;
 }
 
 .card-subtitle {
     color: #6b7280;
-    font-size: 16px;
+    font-size: 14px; /* 从16px调整到14px */
     font-weight: 400;
 }
 
@@ -318,7 +318,7 @@ body::after {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(20px);
     border-top: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 60px 0 40px;
+    padding: 54px 0 36px; /* 从60px 0 40px调整到54px 0 36px */
     position: relative;
     margin-top: auto;
 }
@@ -340,25 +340,25 @@ body::after {
 .footer-content {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 40px;
+    gap: 36px; /* 从40px调整到36px */
+    margin-bottom: 36px; /* 从40px调整到36px */
 }
 
 .footer-brand {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px; /* 从20px调整到18px */
 }
 
 .footer-logo-text {
-    font-size: 28px;
+    font-size: 25px; /* 从28px调整到25px */
     font-weight: 600;
     color: #1f2937;
     letter-spacing: -0.5px;
 }
 
 .footer-subtitle {
-    font-size: 16px;
+    font-size: 14px; /* 从16px调整到14px */
     color: #6b7280;
     margin-top: 4px;
     font-weight: 500;
@@ -371,22 +371,22 @@ body::after {
 
 .section-title {
     color: #1f2937;
-    font-size: 18px;
+    font-size: 16px; /* 从18px调整到16px */
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 18px; /* 从20px调整到18px */
 }
 
 .section-links {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 11px; /* 从12px调整到11px */
 }
 
 .section-links a {
     color: #6b7280;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 14px; /* 从16px调整到14px */
     transition: color 0.3s ease;
     font-weight: 500;
 }
@@ -397,29 +397,29 @@ body::after {
 
 /* 版权信息 */
 .footer-bottom {
-    padding-top: 30px;
+    padding-top: 27px; /* 从30px调整到27px */
     border-top: 1px solid rgba(0, 0, 0, 0.05);
     text-align: center;
 }
 
 .copyright {
     color: #9ca3af;
-    font-size: 14px;
+    font-size: 13px; /* 从14px调整到13px */
     line-height: 1.8;
 }
 
 .legal-links {
-    margin-top: 10px;
+    margin-top: 9px; /* 从10px调整到9px */
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 18px; /* 从20px调整到18px */
     flex-wrap: wrap;
 }
 
 .legal-links a {
     color: #9ca3af;
     text-decoration: none;
-    font-size: 12px;
+    font-size: 11px; /* 从12px调整到11px */
     transition: color 0.3s ease;
 }
 
@@ -431,75 +431,75 @@ body::after {
 @media (max-width: 1024px) {
     .footer-content {
         grid-template-columns: 1fr 1fr;
-        gap: 30px;
+        gap: 27px; /* 从30px调整到27px */
     }
     
     .feature-cards {
         grid-template-columns: 1fr;
-        max-width: 500px;
+        max-width: 450px; /* 从500px调整到450px */
     }
 }
 
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
-        gap: 15px;
-        padding: 15px 0;
+        gap: 13px; /* 从15px调整到13px */
+        padding: 13px 0; /* 从15px调整到13px */
     }
 
     .nav-links {
-        gap: 20px;
+        gap: 18px; /* 从20px调整到18px */
     }
 
     .main-title {
-        font-size: 48px;
+        font-size: 43px; /* 从48px调整到43px */
     }
 
     .main-subtitle {
-        font-size: 24px;
-        margin-bottom: 60px;
+        font-size: 22px; /* 从24px调整到22px */
+        margin-bottom: 54px; /* 从60px调整到54px */
     }
 
     .feature-cards {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 27px; /* 从30px调整到27px */
     }
 
     .footer-content {
         grid-template-columns: 1fr;
         text-align: center;
-        gap: 30px;
+        gap: 27px; /* 从30px调整到27px */
     }
 
     .legal-links {
         flex-direction: column;
-        gap: 10px;
+        gap: 9px; /* 从10px调整到9px */
     }
 }
 
 @media (max-width: 480px) {
     .main-title {
-        font-size: 36px;
+        font-size: 32px; /* 从36px调整到32px */
     }
 
     .main-subtitle {
-        font-size: 20px;
+        font-size: 18px; /* 从20px调整到18px */
     }
 
     .feature-card {
-        padding: 30px 20px;
-        min-height: 160px;
+        padding: 27px 18px; /* 从30px 20px调整到27px 18px */
+        min-height: 144px; /* 从160px调整到144px */
     }
 
     .announcement-banner {
-        padding: 10px 20px;
-        font-size: 13px;
+        padding: 9px 18px; /* 从10px 20px调整到9px 18px */
+        font-size: 12px; /* 从13px调整到12px */
     }
     
     .feature-cards {
         grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 0 10px;
+        gap: 18px; /* 从20px调整到18px */
+        padding: 0 9px; /* 从0 10px调整到0 9px */
     }
 }
 
