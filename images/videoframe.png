@@ -1,0 +1,163 @@
+<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 渐变定义 -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#f8fafc;stop-opacity:0.9" />
+    </linearGradient>
+    
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1677ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5b2eff;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 滤镜定义 -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="1600" height="900" fill="url(#bgGradient)"/>
+  
+  <!-- 背景装饰圆圈 -->
+  <circle cx="200" cy="150" r="100" fill="#ffffff" opacity="0.05"/>
+  <circle cx="1400" cy="750" r="150" fill="#ffffff" opacity="0.03"/>
+  <circle cx="1300" cy="200" r="80" fill="#ffffff" opacity="0.06"/>
+  <circle cx="300" cy="700" r="120" fill="#ffffff" opacity="0.04"/>
+  
+  <!-- 左侧内容区域 -->
+  <g transform="translate(80, 150)">
+    <!-- 主标题 -->
+    <text x="0" y="80" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#ffffff">
+      CryptoLLM
+    </text>
+    
+    <!-- 副标题 -->
+    <text x="0" y="140" font-family="Arial, sans-serif" font-size="32" fill="#ffffff" opacity="0.9">
+      AI-Powered Cryptography Model
+    </text>
+    
+    <!-- 特性标签 -->
+    <g transform="translate(0, 200)">
+      <rect x="0" y="0" width="180" height="45" rx="22" fill="url(#accentGradient)" filter="url(#glow)"/>
+      <text x="90" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="600" fill="#ffffff" text-anchor="middle">
+        密码算法
+      </text>
+    </g>
+    
+    <g transform="translate(200, 200)">
+      <rect x="0" y="0" width="180" height="45" rx="22" fill="rgba(255,255,255,0.2)" stroke="#ffffff" stroke-width="2"/>
+      <text x="90" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="600" fill="#ffffff" text-anchor="middle">
+        密码协议
+      </text>
+    </g>
+    
+    <g transform="translate(400, 200)">
+      <rect x="0" y="0" width="180" height="45" rx="22" fill="rgba(255,255,255,0.2)" stroke="#ffffff" stroke-width="2"/>
+      <text x="90" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="600" fill="#ffffff" text-anchor="middle">
+        密码工程
+      </text>
+    </g>
+  </g>
+  
+  <!-- 右侧可视化区域 -->
+  <g transform="translate(850, 100)">
+    <!-- 主要展示卡片 -->
+    <rect x="0" y="0" width="680" height="480" rx="24" fill="url(#cardGradient)" filter="url(#shadow)"/>
+    
+    <!-- 卡片内容 -->
+    <g transform="translate(40, 40)">
+      <!-- 标题栏 -->
+      <rect x="0" y="0" width="600" height="60" rx="12" fill="url(#accentGradient)"/>
+      <text x="30" y="40" font-family="Arial, sans-serif" font-size="24" font-weight="600" fill="#ffffff">
+        密码学大模型 - 实时演示
+      </text>
+      
+      <!-- 控制按钮 -->
+      <circle cx="540" cy="30" r="8" fill="#ff5f56"/>
+      <circle cx="560" cy="30" r="8" fill="#ffbd2e"/>
+      <circle cx="580" cy="30" r="8" fill="#27ca3f"/>
+      
+      <!-- 代码/数据展示区域 -->
+      <rect x="0" y="80" width="600" height="320" rx="8" fill="#1a1a1a"/>
+      
+      <!-- 模拟代码行 -->
+      <g font-family="monospace" font-size="16">
+        <text x="20" y="110" fill="#4ade80">// CryptoLLM 加密处理</text>
+        <text x="20" y="135" fill="#60a5fa">function encryptData(input) {</text>
+        <text x="40" y="160" fill="#f472b6">const model = new CryptoLLM();</text>
+        <text x="40" y="185" fill="#fbbf24">const encrypted = model.encrypt(</text>
+        <text x="60" y="210" fill="#ffffff">input: </text>
+        <text x="120" y="210" fill="#34d399">"sensitive_data"</text>
+        <text x="40" y="235" fill="#fbbf24">);</text>
+        <text x="40" y="260" fill="#a78bfa">return encrypted;</text>
+        <text x="20" y="285" fill="#60a5fa">}</text>
+        
+        <!-- 输出结果 -->
+        <text x="20" y="320" fill="#4ade80">// 输出结果</text>
+        <text x="20" y="345" fill="#fbbf24">Status: </text>
+        <text x="100" y="345" fill="#10b981">✓ 加密成功</text>
+        <text x="20" y="370" fill="#fbbf24">Security: </text>
+        <text x="120" y="370" fill="#10b981">AES-256 Enhanced</text>
+      </g>
+      
+      <!-- 进度条 -->
+      <rect x="20" y="420" width="560" height="8" rx="4" fill="#e5e7eb"/>
+      <rect x="20" y="420" width="420" height="8" rx="4" fill="url(#accentGradient)"/>
+    </g>
+    
+    <!-- 浮动元素 - 加密图标 -->
+    <g transform="translate(500, -30)">
+      <circle cx="0" cy="0" r="35" fill="url(#accentGradient)" filter="url(#glow)"/>
+      <!-- 锁图标 -->
+      <g transform="translate(-12, -15)">
+        <rect x="0" y="8" width="24" height="16" rx="2" fill="#ffffff"/>
+        <path d="M6 8V6a6 6 0 0 1 12 0v2" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <circle cx="12" cy="14" r="2" fill="url(#accentGradient)"/>
+      </g>
+    </g>
+    
+    <!-- 数据流动效果 -->
+    <g opacity="0.6">
+      <circle cx="-50" cy="240" r="4" fill="#1677ff">
+        <animate attributeName="cx" values="-50;750" dur="3s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-80" cy="280" r="3" fill="#5b2eff">
+        <animate attributeName="cx" values="-80;780" dur="4s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;1;1;0" dur="4s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-30" cy="320" r="5" fill="#667eea">
+        <animate attributeName="cx" values="-30;730" dur="2.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;1;1;0" dur="2.5s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+  </g>
+  
+  <!-- 底部装饰线条 -->
+  <g transform="translate(0, 800)" opacity="0.3">
+    <path d="M0 50 Q400 0 800 50 T1600 50" stroke="#ffffff" stroke-width="2" fill="none"/>
+    <path d="M0 70 Q600 20 1200 70 T1600 70" stroke="#ffffff" stroke-width="1" fill="none"/>
+  </g>
+  
+  <!-- 右下角标识 -->
+  <g transform="translate(1400, 820)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="18" fill="#ffffff" opacity="0.7">
+      Powered by XDU NSS
+    </text>
+  </g>
+</svg>
