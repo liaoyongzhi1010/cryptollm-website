@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoLLM 聊天界面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #2196F3, #21CBF3);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .bot-avatar {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .header-info h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .header-info .subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .message {
+            display: flex;
+            margin-bottom: 20px;
+            gap: 12px;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .user-message {
+            flex-direction: row-reverse;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .bot-message .avatar {
+            background: linear-gradient(135deg, #2196F3, #21CBF3);
+            color: white;
+        }
+
+        .user-message .avatar {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        .bot-message .message-content {
+            background: white;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .user-message .message-content {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+        }
+
+        .message-content ul {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+
+        .message-content li {
+            margin: 4px 0;
+        }
+
+        .message-content strong {
+            font-weight: 600;
+        }
+
+        .chat-input {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e9ecef;
+            display: flex;
+            gap: 12px;
+        }
+
+        .input-field {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            outline: none;
+            font-size: 14px;
+            background: #f8f9fa;
+            color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .send-button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: not-allowed;
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0.6;
+        }
+
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+            padding: 12px 16px;
+            background: white;
+            border-radius: 18px;
+            border: 1px solid #e9ecef;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #999;
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .chat-container {
+                height: 90vh;
+            }
+            
+            .message-content {
+                max-width: 85%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <div class="bot-avatar">🤖</div>
+            <div class="header-info">
+                <h3>CryptoLLM</h3>
+                <div class="subtitle">算法分析助手</div>
+            </div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="avatar">🤖</div>
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-input">
+            <input type="text" class="input-field" placeholder="询问任何问题" disabled>
+            <button class="send-button" disabled>发送</button>
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chatMessages');
+        const typingIndicator = document.getElementById('typingIndicator');
+
+        // 完整的对话内容，包括初始消息
+        const fullConversation = [
+            { type: 'bot', content: '你好！我是CryptoLLM，专业的密码学分析助手。', delay: 1000 },
+            { type: 'user', content: '请分析AES-256加密算法的安全性特点', delay: 1000 },
+            { type: 'bot', content: '<strong>AES-256安全性分析：</strong><br>• <strong>256位密钥长度</strong>，提供2^256种可能的密钥组合，理论上无法暴力破解<br>• <strong>采用SPN结构</strong>，14轮加密轮次确保高度扩散和混淆<br>• <strong>抗量子攻击能力强</strong>，即便面对Grover算法也需要2^128次运算<br>• <strong>被NSA批准用于机密级信息保护</strong>，符合FIPS 140-2标准', delay: 1000 },
+            { type: 'user', content: 'RSA-2048与AES-256对比，在安全性和性能上有什么差异？', delay: 1000 },
+            { type: 'bot', content: '<strong>RSA-2048 vs AES-256 对比分析：</strong><br><strong>安全性对比：</strong><br>• <strong>RSA-2048：</strong>等效80位安全强度，易受量子攻击威胁<br>• <strong>AES-256：</strong>等效128位安全强度，抗量子攻击能力更强<br><strong>性能对比：</strong><br>• <strong>RSA加密：</strong>慢，用于密钥交换<br>• <strong>AES加密：</strong>快，适合数据加密', delay: 1000 },
+            { type: 'user', content: '什么是量子密码学？', delay: 1000 },
+            { type: 'bot', content: '量子密码学是利用量子力学原理来保护信息安全的技术：<br>• 基于量子不确定性原理<br>• 量子密钥分发(QKD)技术<br>• 理论上不可破解的安全性<br>• 可检测窃听行为', delay: 1000 },
+            { type: 'user', content: '椭圆曲线加密相比RSA有什么优势？', delay: 1000 },
+            { type: 'bot', content: '椭圆曲线加密(ECC)的主要优势：<br>• 更短的密钥长度提供相同安全级别<br>• 计算效率更高，适合移动设备<br>• 节省存储空间和带宽<br>• 抗量子攻击能力相对较强', delay: 1000 },
+            { type: 'user', content: '哈希函数在区块链中的作用是什么？', delay: 1000 },
+            { type: 'bot', content: '哈希函数在区块链中起到关键作用：<br>• 生成唯一的区块标识符<br>• 确保数据完整性验证<br>• 构建Merkle树结构<br>• 工作量证明算法的基础<br>• 防止数据篡改和双重支付', delay: 1000 }
+        ];
+
+        let conversationIndex = 0;
+
+        function addMessage(content, isUser = false, shouldStream = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            
+            const avatar = document.createElement('div');
+            avatar.className = 'avatar';
+            avatar.textContent = isUser ? '👤' : '🤖';
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            
+            if (isUser) {
+                messageDiv.appendChild(contentDiv);
+                messageDiv.appendChild(avatar);
+            } else {
+                messageDiv.appendChild(avatar);
+                messageDiv.appendChild(contentDiv);
+            }
+            
+            chatMessages.insertBefore(messageDiv, typingIndicator);
+            
+            if (shouldStream && !isUser) {
+                // 流式显示文本
+                streamText(contentDiv, content);
+            } else {
+                contentDiv.innerHTML = `<p>${content}</p>`;
+            }
+            
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function streamText(element, text) {
+            element.innerHTML = '<p></p>';
+            const paragraph = element.querySelector('p');
+            let currentIndex = 0;
+            
+            function addNextChar() {
+                if (currentIndex < text.length) {
+                    const currentChar = text[currentIndex];
+                    
+                    // 如果遇到HTML标签，整个标签一次性添加
+                    if (currentChar === '<') {
+                        const tagEnd = text.indexOf('>', currentIndex);
+                        if (tagEnd !== -1) {
+                            const fullTag = text.substring(currentIndex, tagEnd + 1);
+                            paragraph.innerHTML += fullTag;
+                            currentIndex = tagEnd + 1;
+                            setTimeout(addNextChar, 5); // HTML标签后很快继续
+                            return;
+                        }
+                    }
+                    
+                    paragraph.innerHTML += currentChar;
+                    currentIndex++;
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    
+                    // 根据字符类型调整速度
+                    let delay = 35; // 默认35ms
+                    if (['。', '！', '？', '.', '!', '?'].includes(currentChar)) {
+                        delay = 200; // 句号后停顿更久
+                    } else if (['，', '、', ',', ';', ':', '：'].includes(currentChar)) {
+                        delay = 100; // 逗号后稍作停顿
+                    } else if (currentChar === ' ') {
+                        delay = 25; // 空格稍快
+                    } else if (['•', '·'].includes(currentChar)) {
+                        delay = 120; // 列表符号后停顿
+                    }
+                    
+                    setTimeout(addNextChar, delay);
+                } else {
+                    // 文本显示完成，继续下一条消息
+                    conversationIndex++;
+                    setTimeout(() => startConversation(), 1000);
+                }
+            }
+            
+            addNextChar();
+        }
+
+        function showTyping() {
+            typingIndicator.style.display = 'flex';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function hideTyping() {
+            typingIndicator.style.display = 'none';
+        }
+
+        function startConversation() {
+            if (conversationIndex >= fullConversation.length) {
+                // 重置对话
+                conversationIndex = 0;
+                setTimeout(() => {
+                    // 清除所有消息
+                    const messages = chatMessages.querySelectorAll('.message');
+                    messages.forEach(message => message.remove());
+                    startConversation();
+                }, 3000);
+                return;
+            }
+
+            const currentMessage = fullConversation[conversationIndex];
+            
+            setTimeout(() => {
+                if (currentMessage.type === 'bot') {
+                    showTyping();
+                    setTimeout(() => {
+                        hideTyping();
+                        addMessage(currentMessage.content, false, true); // 开启流式显示
+                        // 不在这里调用 conversationIndex++ 和 startConversation()，
+                        // 因为这些会在 streamText 完成后调用
+                    }, 300); // 打字指示器显示时间
+                } else {
+                    addMessage(currentMessage.content, true);
+                    conversationIndex++;
+                    startConversation();
+                }
+            }, currentMessage.delay);
+        }
+
+        // 开始对话演示
+        startConversation();
+    </script>
+</body>
+</html>
